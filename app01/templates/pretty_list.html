@@ -1,0 +1,79 @@
+{%  extends 'layout.html' %}
+{%  block style %}
+    <style>
+
+    </style>
+{%  endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="clearfix">
+            <a class="btn-success btn" href="/pretty/add/" style="margin-bottom: 15px">新建靓号</a>
+
+            <div style="float: right;width: 270px" >
+                <form method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="搜索..." name="q" value="{{ value }}">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                    </div><!-- /input-group -->
+                </form>
+            </div>
+
+        </div>
+
+
+        <div class="bs-example" data-example-id="bordered-table">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>号码</th>
+                <th>级别</th>
+                <th>价格</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in queryset %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.mobile }}</td>
+                    <td>{{ item.get_level_display }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.get_status_display }}</td>
+                    <td>
+                        <span>
+                            <a href="/pretty/{{ item.id }}/edit/" class="btn btn-primary btn-xs" >编辑</a>
+                            <a href="/pretty/{{ item.id }}/delete/" class="btn btn-danger btn-xs" >删除</a>
+                        </span>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 10px " >
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li>
+                    <a href="?page=1" aria-label="head">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {{ page_string }}
+            </ul>
+        </nav>
+    </div>
+
+
+
+    </div>
+
+
+{% endblock %}

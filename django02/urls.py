@@ -15,11 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app01 import views
+from app01.views import account, pretty, admin
+
 
 urlpatterns = [
-    path('pretty/list/', views.pretty_list),
-    path('pretty/add/', views.pretty_add),
-    path('pretty/<int:nid>/edit/', views.pretty_edit),
-    path('pretty/<int:nid>/delete/', views.pretty_delete),
+    path('pretty/list/', pretty.pretty_list),
+    path('pretty/add/', pretty.pretty_add),
+    path('pretty/<int:nid>/edit/', pretty.pretty_edit),
+    path('pretty/<int:nid>/delete/', pretty.pretty_delete),
+
+    path('admin/list/',  admin.admin_list),
+    path('admin/add/',  admin.admin_add),
+    path('admin/<int:nid>/edit/',  admin.admin_edit),
+    path('admin/<int:nid>/delete/',  admin.admin_delete),
+    path('admin/<int:nid>/reset/',  admin.admin_reset),
+
+    path('login/', account.account_login),
+    path('logout/', account.account_logout),
+    path('image/code/', account.image_code)
 ]

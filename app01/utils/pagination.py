@@ -35,10 +35,10 @@ class Pagination(object):
         self.page_queryset = queryset[self.start: self.end]
 
         # 数据总条数
-        total_count = queryset.count()
+        self.total_count = queryset.count()
 
         # 总页码
-        total_page_count, div = divmod(total_count, page_size)
+        total_page_count, div = divmod(self.total_count, page_size)
         if div:
             total_page_count += 1
         self.total_page_count = total_page_count
@@ -50,8 +50,12 @@ class Pagination(object):
         # 显示当前页的前五页,后五页
         if self.total_page_count <= 2 * self.plus + 1:
             # 数据库中的数据比较少,未达到11页
-            start_page = 1
-            end_page = 2 * self.plus + 1
+            if self.total_count == 0:
+                start_page = 1
+                end_page = self.total_page_count + 1
+            else:
+                start_page = 1
+                end_page = self.total_page_count
         # 数据库中的数据大于11页
         else:
             if self.page <= self.plus:

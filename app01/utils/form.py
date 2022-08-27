@@ -135,3 +135,16 @@ class AccountModelForm(BootStrapModelForm):
         pwd = self.cleaned_data.get("password")
         md5_pwd = md5(pwd)
         return md5_pwd
+
+
+class TaskModelForm(BootStrapModelForm):
+    class Meta:
+        model = models.Task
+        fields = "__all__"  # 所有的字段
+
+
+class OrderModelForm(BootStrapModelForm):
+    class Meta:
+        model = models.Order
+        fields = "__all__"
+        exclude = ["oid", "admin"]
